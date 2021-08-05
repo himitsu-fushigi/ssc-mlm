@@ -4,6 +4,8 @@ module.exports = {
     createAuthentication: async (req, res, next) => {
         const {phone, createdAt, expiresAt} = req.body;
         try {
+            // @dev create auth for user with default password
+            // default password is stored in .env file
             const newAuth = new DistributorAuthentication({
                 _id: req.chainId,
                 phone_number: phone,
@@ -14,7 +16,7 @@ module.exports = {
 
             await newAuth.save()
 
-            res.send("Done")
+            res.status(200).json({message: "Success"})
         } catch (error) {
             console.log(error)
         }

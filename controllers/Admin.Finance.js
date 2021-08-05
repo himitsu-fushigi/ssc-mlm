@@ -7,7 +7,7 @@ module.exports = {
     const { createdAt, expiresAt, isAdmin, referrer, amount } = req.body;
 
     try {
-      // @dev admin finance is created everytime new customer or leader is generated
+      // @dev only leaders have the salary reserve
       if (isAdmin) {
         const newAdminFinance = new AdminFinance({
           _id: req.chainId,
