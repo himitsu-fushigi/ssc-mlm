@@ -26,13 +26,13 @@ module.exports = {
 
         if (temp_referrer.referrer) count = 2; // @dev if the distributor has 2 level of referrer increase count
 
+        // @dev get previous finance to add new amount to referrer
+        const prevDistributorFinance = await DistributorFinance.findOne({
+          ssc_number: referrer,
+        });
+
         // @dev distribute amount to referrer & admin here
         if (count === 1) {
-          // @dev get previous finance to add new amount to referrer
-          const prevDistributorFinance = await DistributorFinance.findOne({
-            ssc_number: referrer,
-          });
-
           switch (amount) {
             // @dev if card type is 1000
             case "1000":
@@ -43,9 +43,7 @@ module.exports = {
                 },
                 {
                   $set: {
-                    amount_earned: (
-                      parseInt(prevDistributorFinance.amount_earned) + 120
-                    ).toString(),
+                    amount_earned: prevDistributorFinance.amount_earned + 120,
                     amount_earned_from: [
                       ...prevDistributorFinance.amount_earned_from,
                       newNode,
@@ -64,9 +62,7 @@ module.exports = {
                 },
                 {
                   $set: {
-                    amount_earned: (
-                      parseInt(prevDistributorFinance.amount_earned) + 245
-                    ).toString(),
+                    amount_earned: prevDistributorFinance.amount_earned + 240,
                     amount_earned_from: [
                       ...prevDistributorFinance.amount_earned_from,
                       newNode,
@@ -85,9 +81,7 @@ module.exports = {
                 },
                 {
                   $set: {
-                    amount_earned: (
-                      parseInt(prevDistributorFinance.amount_earned) + 365
-                    ).toString(),
+                    amount_earned: prevDistributorFinance.amount_earned + 365,
                     amount_earned_from: [
                       ...prevDistributorFinance.amount_earned_from,
                       newNode,
@@ -100,11 +94,9 @@ module.exports = {
               return;
           }
         } else if (count === 2) {
-          // @dev get previous finance to add new amount to referrer
-          const prevDistributorFinance = await DistributorFinance.findOne({
-            ssc_number: referrer,
+          const firstLevelFinance = await DistributorFinance.findOne({
+            ssc_number: temp_referrer.referrer,
           });
-
           switch (amount) {
             case "1000":
               // @dev update distributor finance
@@ -114,9 +106,7 @@ module.exports = {
                 },
                 {
                   $set: {
-                    amount_earned: (
-                      parseInt(prevDistributorFinance.amount_earned) + 120
-                    ).toString(),
+                    amount_earned: prevDistributorFinance.amount_earned + 120,
                     amount_earned_from: [
                       ...prevDistributorFinance.amount_earned_from,
                       newNode,
@@ -132,9 +122,7 @@ module.exports = {
                 },
                 {
                   $set: {
-                    amount_earned: (
-                      parseInt(prevDistributorFinance.amount_earned) + 120
-                    ).toString(),
+                    amount_earned: firstLevelFinance.amount_earned + 120,
                     amount_earned_from: [
                       ...prevDistributorFinance.amount_earned_from,
                       newNode,
@@ -151,9 +139,7 @@ module.exports = {
                 },
                 {
                   $set: {
-                    amount_earned: (
-                      parseInt(prevDistributorFinance.amount_earned) + 245
-                    ).toString(),
+                    amount_earned: prevDistributorFinance.amount_earned + 240,
                     amount_earned_from: [
                       ...prevDistributorFinance.amount_earned_from,
                       newNode,
@@ -169,9 +155,7 @@ module.exports = {
                 },
                 {
                   $set: {
-                    amount_earned: (
-                      parseInt(prevDistributorFinance.amount_earned) + 245
-                    ).toString(),
+                    amount_earned: firstLevelFinance.amount_earned + 240,
                     amount_earned_from: [
                       ...prevDistributorFinance.amount_earned_from,
                       newNode,
@@ -189,9 +173,7 @@ module.exports = {
                 },
                 {
                   $set: {
-                    amount_earned: (
-                      parseInt(prevDistributorFinance.amount_earned) + 365
-                    ).toString(),
+                    amount_earned: prevDistributorFinance.amount_earned + 365,
                     amount_earned_from: [
                       ...prevDistributorFinance.amount_earned_from,
                       newNode,
@@ -207,9 +189,7 @@ module.exports = {
                 },
                 {
                   $set: {
-                    amount_earned: (
-                      parseInt(prevDistributorFinance.amount_earned) + 365
-                    ).toString(),
+                    amount_earned: firstLevelFinance.amount_earned + 365,
                     amount_earned_from: [
                       ...prevDistributorFinance.amount_earned_from,
                       newNode,
