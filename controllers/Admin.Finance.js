@@ -1,6 +1,6 @@
 const AdminFinance = require("../models/Admin.Finance");
 const DistributorChain = require("../models/Distributor.Chain");
-const DistributorFinance = require("../models/Distributor.Finance");
+// const DistributorFinance = require("../models/Distributor.Finance");
 
 module.exports = {
   createAdminFinance: async (req, res, next) => {

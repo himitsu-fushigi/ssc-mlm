@@ -124,7 +124,7 @@ module.exports = {
                   $set: {
                     amount_earned: firstLevelFinance.amount_earned + 120,
                     amount_earned_from: [
-                      ...prevDistributorFinance.amount_earned_from,
+                      ...firstLevelFinance.amount_earned_from,
                       newNode,
                     ],
                   },
@@ -157,7 +157,7 @@ module.exports = {
                   $set: {
                     amount_earned: firstLevelFinance.amount_earned + 240,
                     amount_earned_from: [
-                      ...prevDistributorFinance.amount_earned_from,
+                      ...firstLevelFinance.amount_earned_from,
                       newNode,
                     ],
                   },
@@ -191,7 +191,7 @@ module.exports = {
                   $set: {
                     amount_earned: firstLevelFinance.amount_earned + 365,
                     amount_earned_from: [
-                      ...prevDistributorFinance.amount_earned_from,
+                      ...firstLevelFinance.amount_earned_from,
                       newNode,
                     ],
                   },
